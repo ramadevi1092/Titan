@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Show Missing Child - Transact 360 </title>
+  <!-- <link rel="stylesheet" type="text/css"
+    href="https://storage.googleapis.com/autoslate-app/AutoSlate/CDN/deps/opt/bootstrap.css" /> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body>
+  <style>
+    label,
+    legend {
+      margin: 0 !important;
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 15px !important;
+    }
+
+    input.btn {
+      float: right !important;
+    }
+  </style>
+  <div id="page-wrapper">
+    <header id="header" class="alt" style="background-color: black;z-index: 1;">
+      <h1 style="margin-top: 3px;"><a href="Titan_Landing.html"><img src="images/Logo.png" style="width:50%"></img></h1>
+      <nav id="nav">
+        <ul>
+          <li><a href="Register_Disaster.html">Register Disaster</a></li>
+          <li>
+            <a href="#" class="icon solid fa-angle-down">Help a child</a>
+            <ul>
+              <li><a href="Register_MissingKid.html">Register Missing Child</a></li>
+              <li><a href="Transact360_ShowMissingChild.html">Search Missing Child</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="icon solid fa-angle-down">Donate</a>
+            <ul>
+              <li><a href="Transact360_Donations.html">Donate as Ripples</a></li>
+              <li><a href="Transact360_XRPLTransaction.html">List Transactions</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="icon solid fa-angle-down">Register</a>
+            <ul>
+              <li><a href="Register_Agency.html">Register Agency</a></li>
+              <li><a href="Register_GovtOfficial.html">Register as Govt Official</a></li>
+              <li><a href="Register_Victim.html">Register as Victim</a></li>
+              <li><a href="Register_Volunteer.html">Register as Volunteer</a></li>
+            </ul>
+          </li>
+          <li><a href="Titan_Contact.html">Contact</a></li>
+          <!-- <li><a href="#" class="button">Sign In</a></li> -->
+        </ul>
+      </nav>
+    </header>
+  </div>
+  <div class="container">
+    <div style="margin-top: 30px;">
+      <ol style="background-color:antiquewhite; font-size: larger;color: black;">
+        <li>All the missing children details are stored securely on <b><i><u>XRP-Ledger on the Ripple
+                Blockchain</u></i></b></li>
+        <li>The end user can <b><i><u>list and search </b></i></u>the missing children and contact agents</li>
+        <li>The end user can view the Children details on <b><i><u>clicking the transaction id</b></i></u></li>
+        <li>This is a fusion of <b><i><u>Web3 tokens with SQLite</b></i></u> to create an integrated NFT wallet</li>
+      </ol>
+
+    </div>
+    <button class="btn btn-primary my-3" id="infobtn" onclick="accntInfoBtn()">List Missing Children on Ripple XRP Ledger</button>
+    <form id="searchForm" style="display: none;"></form>
+    <form id="paymentForm" style="display: none;"></form>
+    <form id="qrCode" style="display: none;"></form>
+    <pre id="myText"></pre>
+    <div id="feedbackGrid" class="mt-3"></div>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=""></div>
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <span style="font-weight: bold;">Additional Information:</span><br />
+          <img id="childimage" src="" style="width: 50%" />
+          <div id="childForm"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Contact Agency</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br></br>
+  <footer id="footer">
+    <ul class="icons">
+      <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+      <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+      <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+      <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+      <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+      <li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+    </ul>
+    <ul class="copyright">
+      <li>&copy; Web3athon Titan Hackathon. All rights reserved.</li>
+    </ul>
+  </footer>
+  <div id="res" class="alert"></div>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/jquery.min.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/jquery.dropotron.min.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/jquery.scrollex.min.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/browser.min.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/breakpoints.min.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/util.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/main.js"></script>
+  <script type="text/javascript"
+    src="https://storage.googleapis.com/autoslate-app/AutoSlate/CDN/deps/underscore.js"></script>
+  <script type="text/javascript"
+    src="https://storage.googleapis.com/autoslate-app/AutoSlate/CDN/deps/opt/jsv.js"></script>
+  <script type="text/javascript"
+    src="https://storage.googleapis.com/autoslate-app/AutoSlate/CDN/lib/jsonform.js"></script>
+  <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+  <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+  <script id="template" type="text/x-template">
+    <div>
+        <a href="#" class="opendetails">${hash}</a>
+    </div>
+</script>
+  <script type="text/javascript">
+
+
+    $(document).on("click", ".opendetails", function (e) {
+      showMyModalSetTitle(e.target.innerHTML);
+    });
+
+    function showMyModalSetTitle(title) {
+      debugger
+      $("#exampleModalLabel").html("XRP Ledger Transaction Id : " + title);
+      var fetchObj = {};
+      fetchObj.type = "QueryAppointmentDbForMissingChild";
+      fetchObj.bucketName = "exl-appointment-db";
+      fetchObj.queryType = "read";
+      fetchObj.TransactionId = title;
+      let url = "https://chart-api-c7qrsmhagq-uc.a.run.app?dbParams=" + JSON.stringify(fetchObj);
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          let childRec = data[0];
+          
+          $('#childForm').jsonForm({
+            schema: {
+              FirstName: {
+                type: 'string',
+                title: 'First Name',
+                default: `${childRec.FirstName}`,
+                readonly: true
+              },
+              MiddleName: {
+                type: 'string',
+                title: 'Middle Name',
+                default: `${childRec.MiddleName}`,
+                readonly: true
+              },
+              LastName: {
+                type: 'string',
+                title: 'Last Name',
+                default: `${childRec.LastName}`,
+                readonly: true
+              },
+              Contact: {
+                type: 'string',
+                title: 'Contact',
+                default: `${childRec.ContactNumber}`,
+                readonly: true
+              },
+              Address: {
+                type: 'string',
+                title: 'Address',
+                default: `${childRec.Address}`,
+                readonly: true
+              },
+              Disaster: {
+                type: 'string',
+                title: 'Disaster',
+                default: `${childRec.Disaster}`,
+                readonly: true
+              },
+            },
+            form: [
+
+              {
+                key: "FirstName",
+                type: "text"
+              },
+              {
+                key: "MiddleName",
+                type: "text"
+              },
+              {
+                key: "LastName",
+                type: "text"
+              },
+              {
+                key: "Contact",
+                type: "text"
+              },
+              {
+                key: "Address",
+                type: "text"
+              },
+              {
+                key: "Disaster",
+                type: "text"
+              }
+            ],
+          });
+          document.querySelector("#childimage").setAttribute("src",childRec.PhotoUrl)
+          $('#exampleModal').modal('show');
+        })
+
+    }
+
+    document.addEventListener("DOMContentLoaded", _ => {
+      $('#feedbackGrid').hide();
+      grid = new ej.grids.Grid({
+        dataSource: [],
+        allowSelection: true,
+        allowFiltering: true,
+        allowSorting: true,
+        allowPaging: true,
+        enableVirtualization: true,
+        toolbar: ['Search'],
+        filterSettings: { type: 'Excel' },
+        selectionSettings: { persistSelection: true, type: "Multiple", checkboxOnly: true },
+        enableHover: false,
+        enableHeaderFocus: true,
+        pageSettings: { pageCount: 4, pageSizes: true },
+        height: 300,
+        rowHeight: 38,
+        columns: [
+          { field: 'date', headerText: 'Date' },
+          { field: 'Amount', headerText: 'Amount value',visible:false },
+          { field: 'Account', headerText: 'From' },
+          { field: 'Destination', headerText: 'To' },
+          { field: 'Sequence', headerText: 'Sequence' },
+          { field: 'hash', headerText: 'TransactionId', template: "#template" },
+          { field: 'ledger_index', headerText: 'ledger_index', visible: false },
+
+          {
+            headerText: 'Hash', width: 100,
+            commands: [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-hyperlink-open', cssClass: 'e-flat' } }]
+          }
+        ],
+        commandClick: (args) => {
+          debugger
+          if (args.commandColumn.type == "Edit") {
+            //handleUpdateFeedback();
+
+            var hash = `${args.rowData.hash}`
+            window.open("https://testnet.xrpl.org/transactions/" + hash, "_blank");
+          }
+        }
+
+      });
+      grid.appendTo('#feedbackGrid');
+    });
+    handleUpdateFeedback = () => {
+      let updateFormEle = document.querySelector("#updateForm");
+      updateFormEle.style.display = updateFormEle.style.display == "none" ? "" : "none";
+    }
+
+    accntInfoBtn = () => {
+      let insertFormEle = document.querySelector("#searchForm");
+      insertFormEle.style.display = insertFormEle.style.display == "none" ? "" : "none";
+      $('#paymentForm').hide();
+      $('#updateForm').hide();
+      $('#searchForm').html("");
+      $('#myText').hide();
+      let newUuid = uuidv4();
+      $('#searchForm').jsonForm({
+        schema: {
+          Search: {
+            type: 'string',
+            title: 'Enter Missing Children centralized Account Key',
+            default: "rBvvZEavBqFYsFU4PMTietZ5Y9vTP8Wtqb",
+            required: true
+          }
+        },
+        form: [
+
+          {
+            key: "Search",
+            type: "text"
+          },
+          {
+            type: "submit",
+            title: "Submit"
+          }
+        ],
+        onSubmit: function (errors, values) {
+          if (errors) {
+            $('#res').html('<p>Please fill required fields!</p>');
+          }
+          else {
+            console.log(values);
+
+            var paramsObj = {};
+            paramsObj.type = "Ripple";
+            paramsObj.queryType = "info";
+            paramsObj.account = values.Search;
+            //alert(paramsObj)
+
+            let url = "https://chart-api-c7qrsmhagq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj);
+            fetch(url)
+              .then(response => response.json())
+              .then(data => {
+                debugger
+                //alert(data)
+                // document.getElementById("myText").innerHTML = JSON.stringify(data, null, 4);
+                //grid.dataSource = data;
+                document.getElementById("myText").innerHTML = "";
+                for (var key in data.account_data) {
+                  //if (data.hasOwnProperty(key)) {
+                  debugger
+                  // console.log(key + " : " + data.account_data[key]);
+                  document.getElementById("myText").innerHTML += key + " : " + data.account_data[key] + "\n";
+
+
+                  //}
+                }
+                $('#myText').show();
+
+                $('#feedbackGrid').show();
+                let insertFormEle = document.querySelector("#searchForm");
+                insertFormEle.style.display = insertFormEle.style.display == "none" ? "" : "none";
+                $('#paymentForm').hide();
+                $('#updateForm').hide();
+                $('#searchForm').html("");
+                //accntInfoBtn();
+              })
+            var paramsObj = {}
+            paramsObj.type = "Ripple";
+            paramsObj.queryType = "txhistory";
+            paramsObj.account = values.Search;
+
+
+            let url1 = "https://chart-api-c7qrsmhagq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj)
+            fetch(url1)
+              .then(response => response.json())
+              .then(data => {
+                let datanew = [...data].map(x => { x.Amount = 1; return x; });
+                grid.dataSource = datanew;
+
+              });
+          }
+        }
+      });
+
+    }
+
+  </script>
+</body>
+
+</html>

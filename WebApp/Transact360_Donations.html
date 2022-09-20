@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Donations - Transact360</title>
+  <!-- <link rel="stylesheet" type="text/css"
+    href="https://storage.googleapis.com/autoslate-app/AutoSlate/CDN/deps/opt/bootstrap.css" /> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body>
+  <style>
+    label,
+    legend {
+      margin: 0 !important;
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 15px !important;
+    }
+  </style>
+  <div id="page-wrapper">
+    <header id="header" class="alt" style="background-color: black;">
+      <h1 style="margin-top: 3px;"><a href="Titan_Landing.html"><img src="images/Logo.png" style="width:50%"></img></h1>
+      <nav id="nav">
+        <ul>
+          <li><a href="Register_Disaster.html">Register Disaster</a></li>
+          <li>
+            <a href="#" class="icon solid fa-angle-down">Help a child</a>
+            <ul>
+              <li><a href="Register_MissingKid.html">Register Missing Child</a></li>
+              <li><a href="Transact360_ShowMissingChild.html">Search Missing Child</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="icon solid fa-angle-down">Donate</a>
+            <ul>
+              <li><a href="Transact360_Donations.html">Donate as Ripples</a></li>
+              <li><a href="Transact360_XRPLTransaction.html">List Transactions</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="icon solid fa-angle-down">Register</a>
+            <ul>
+              <li><a href="Register_Agency.html">Register Agency</a></li>
+              <li><a href="Register_GovtOfficial.html">Register as Govt Official</a></li>
+              <li><a href="Register_Victim.html">Register as Victim</a></li>
+              <li><a href="Register_Volunteer.html">Register as Volunteer</a></li>
+            </ul>
+          </li>
+          <li><a href="Titan_Contact.html">Contact</a></li>
+          <!-- <li><a href="#" class="button">Sign In</a></li> -->
+        </ul>
+      </nav>
+    </header>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=""></div>
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="childForm"></div>
+          <span style="font-weight: bold;">Additional Information:</span><br />
+          <iframe id="iframeqr" src="" ></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div style="margin-top: 30px;">
+      <ol style="background-color:antiquewhite; font-size: larger;color: black;">
+        <li>Any Donor can <b><i><u>donate funds in XRP's</u> to an already registerd Disaster in Ripple
+              Blockchain</b></i></li>
+        <li>Donations can be done by manually filling <b><i><u>Public Key, Private Key, Sequence Id</u></i></b></li>
+        <li>Donor can also <b><i><u>Scan QR code via XUMM Application through Cell phone</u></i></b> to transfer XRP's
+        </li>
+      </ol>
+
+    </div>
+    <button class="btn btn-primary my-3" onclick="sendPaymentBtn()">Donate</button>
+    <button class="btn btn-primary my-3" onclick="scanQRBtn()">Scan QR</button>
+    <form id="searchForm" style="display: none;"></form>
+    <form id="paymentForm" style="display: none;"></form>
+    <form id="qrCode" style="display: none;"></form>
+    <div id="feedbackGrid" class="mt-3"></div>
+  </div>
+  <br></br>
+  <footer id="footer">
+    <ul class="icons">
+      <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+      <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+      <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+      <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+      <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+      <li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+    </ul>
+    <ul class="copyright">
+      <li>&copy; Web3athon Titan Hackathon. All rights reserved.</li>
+    </ul>
+  </footer>
+
+  <div id="res" class="alert"></div>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/jquery.min.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/jquery.dropotron.min.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/jquery.scrollex.min.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/browser.min.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/breakpoints.min.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/util.js"></script>
+  <script src="https://storage.googleapis.com/supplierexplorer/WebApp/assets/js/main.js"></script>
+  <script type="text/javascript"
+    src="https://storage.googleapis.com/autoslate-app/AutoSlate/CDN/deps/underscore.js"></script>
+  <script type="text/javascript"
+    src="https://storage.googleapis.com/autoslate-app/AutoSlate/CDN/deps/opt/jsv.js"></script>
+  <script type="text/javascript"
+    src="https://storage.googleapis.com/autoslate-app/AutoSlate/CDN/lib/jsonform.js"></script>
+  <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+  <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript">
+
+
+    document.addEventListener("DOMContentLoaded", _ => {
+      $('#feedbackGrid').hide();
+      var paramsObj = {}
+      paramsObj.type = "Ripple";
+      paramsObj.queryType = "txhistory";
+      paramsObj.account = "rwRixyDvKsYRCxiov8g3WE8PXRyH1AYkT8";
+      paramsObj.record = {};
+
+      let url = "https://chart-api-c7qrsmhagq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj)
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+
+          grid = new ej.grids.Grid({
+
+            dataSource: data,
+            allowSelection: true,
+            allowFiltering: true,
+            allowSorting: true,
+            allowPaging: true,
+            enableVirtualization: true,
+            toolbar: ['Search'],
+            filterSettings: { type: 'Menu' },
+            selectionSettings: { persistSelection: true, type: "Multiple", checkboxOnly: true },
+            enableHover: false,
+            enableHeaderFocus: true,
+            pageSettings: { pageCount: 4, pageSizes: true },
+            height: 300,
+            rowHeight: 38,
+            columns: [
+              { field: 'TransactionType', headerText: 'Transaction Type' },
+              { field: 'date', headerText: 'Date' },
+              { field: 'Amount', headerText: 'Amount value' },
+              { field: 'Type', headerText: 'Type' },
+              { field: 'Account', headerText: 'From' },
+              { field: 'Destination', headerText: 'To' },
+
+              { field: 'Fee', headerText: 'Fee' },
+              { field: 'Sequence', headerText: 'Sequence' },
+              // { field: 'TxnSignature', headerText: 'Txn Signature' },
+              { field: 'hash', headerText: 'Hash', visible: false },
+              { field: 'ledger_index', headerText: 'ledger_index', visible: false },
+
+              {
+                headerText: 'Hash', width: 100,
+                commands: [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-hyperlink-open', cssClass: 'e-flat' } }]
+              }
+            ],
+            commandClick: (args) => {
+              debugger
+              if (args.commandColumn.type == "Edit") {
+                //handleUpdateFeedback();
+
+                var hash = `${args.rowData.hash}`
+                window.open("https://testnet.xrpl.org/transactions/" + hash, "_blank");
+              }
+            }
+
+          });
+          grid.appendTo('#feedbackGrid');
+        });
+
+    });
+
+    sendPaymentBtn = () => {
+      let insertFormEle = document.querySelector("#paymentForm");
+      insertFormEle.style.display = insertFormEle.style.display == "none" ? "" : "none";
+      $('#feedbackGrid').hide();
+      $('#searchForm').hide();
+      $('#paymentForm').html("");
+      let newUuid = uuidv4();
+      $('#paymentForm').jsonForm({
+        schema: {
+          SecretKey: {
+            type: 'string',
+            default: "ssPZ4j1Sx9U6D1w1LsTqdegZAx1is",
+            title: 'Enter Account Secret Key',
+            required: true
+          },
+          Sequence: {
+            type: 'number',
+            default: 30012956,
+            title: 'Enter Account Sequence Key',
+            required: true
+          },
+          ReceiversKey: {
+            type: 'string',
+            default: "rwRixyDvKsYRCxiov8g3WE8PXRyH1AYkT8",
+            title: 'Enter Receivers Key',
+            required: true
+          },
+          Amount: {
+            type: 'number',
+            title: 'Enter XRP',
+            default: 1,
+            required: true
+          },
+        },
+        form: [
+          {
+            key: "SecretKey",
+            type: "text"
+          },
+          {
+            key: "Sequence",
+            type: "text"
+          },
+          {
+            key: "ReceiversKey",
+            type: "text"
+          },
+          {
+            key: "Amount",
+            type: "text"
+          },
+
+          {
+            type: "submit",
+            title: "Confirm Payment"
+          }
+        ],
+        onSubmit: function (errors, values) {
+          if (errors) {
+            $('#res').html('<p>Please fill required fields!</p>');
+          }
+          else {
+            console.log(values);
+            var paramsObj = {};
+            paramsObj.type = "Ripple";
+            paramsObj.queryType = "sendxrp";
+            var record = {};
+            record.SecretKey = values.SecretKey;
+            record.Sequence = values.Sequence;
+            record.ReceiversKey = values.ReceiversKey;
+            record.Amount = values.Amount;
+            paramsObj.record = record;
+            let url = "https://chart-api-c7qrsmhagq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj);
+            fetch(url)
+              .then(response => response.text())
+              .then(data => {
+                alert(data);
+                var fetchObj = {};
+                fetchObj.type = "MongodbData";
+                fetchObj.database = "Industry";
+                fetchObj.collection = "Suppliers";
+                fetchObj.queryType = "read";
+                fetchObj.record = {};
+                let url = "https://chart-api-c7qrsmhagq-uc.a.run.app?dbParams=" + JSON.stringify(fetchObj);
+                fetch(url)
+                  .then(response => response.json())
+                  .then(data => {
+                    grid.dataSource = data;
+                    sendPaymentBtn();
+                  })
+              })
+          }
+        }
+      });
+
+    }
+
+    handleUpdateFeedback = () => {
+      let updateFormEle = document.querySelector("#updateForm");
+      updateFormEle.style.display = updateFormEle.style.display == "none" ? "" : "none";
+    }
+
+    scanQRBtn = () => {
+      var paramsObj = {};
+      paramsObj.type = "Ripple";
+      paramsObj.queryType = "qrcode";
+
+      //alert(paramsObj)
+
+      let url = "https://chart-api-c7qrsmhagq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj);
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          window.open(data, "_blank");
+          // $("#exampleModalLabel").html("Scan QR");
+          // document.querySelector("#iframeqr").setAttribute("src",data)
+          // $('#exampleModal').modal('show');
+        })
+    }
+
+  </script>
+</body>
+
+</html>
